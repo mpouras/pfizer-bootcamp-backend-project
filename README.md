@@ -56,3 +56,8 @@ cp .env.example .env
 ```
 ./vendor/bin/sail artisan migrate
 ```
+
+- Generate artisan key for .env file
+```
+php artisan key:generate
+```
