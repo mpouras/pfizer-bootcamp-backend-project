@@ -25,4 +25,5 @@ class Product extends Model
         'manufacturing_date',
         'expiration_date'
     ];
+    
 }
