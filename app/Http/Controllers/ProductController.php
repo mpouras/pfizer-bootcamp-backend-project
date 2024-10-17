@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Http\Request\ProductStoreRequest;
-use Illuminate\Http\Request\ProductUpdateRequest;
+use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -21,39 +21,34 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
+        $data = $request->only('name', 'category',
+        'active_ingredients','research_status','batch_number',
+        'manufacturing_date','expiration_date');
 
-        $product = Product::create([
-            'name' => $request->name,
-            'category' => $request->category,
-            'active_ingredients' => $request->active_ingredients,
-            'research_status' => $request->research_status,
-            'batch_number' => $request->batch_number,
-            'manufacturing_date' => $request->manufacturing_date,
-            'expiration_date' => $request->expiration_date,
-        ]);
+        Product::create($data); 
 
-        return response()->json($product, 201);
+        return response()->json(null, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        $product = Product::findOrFail($id);
         return response()->json($product);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        $product = Product::findOrFail($id);
 
-        $data = $request->only('name');
+        $data = $request->only('name','category',
+        'active_ingredients','research_status','batch_number',
+        'manufacturing_date','expiration_date');
         $product->update($data);
 
         return response()->json($product, 200);
@@ -62,9 +57,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
         $product->delete();
 
         return response()->json($product);

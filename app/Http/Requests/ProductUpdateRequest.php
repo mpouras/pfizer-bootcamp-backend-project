@@ -22,7 +22,13 @@ class ProductUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'name' => 'nullable|string|unique:products,name',
+            'category' => 'nullable|string',
+            'active_ingredients' => 'nullable|string',
+            'research_status' => 'nullable|string|in:Approved,In Development,Experimental',
+            'batch_number' => 'nullable|string|unique:products,batch_number',
+            'manufacturing_date' =>'nullable|date|before_or_equal:today' ,
+            'expiration_date' =>'nullable|date|after:manufacturing_date',
         ];
     }
 }
