@@ -25,7 +25,7 @@ class ProductUpdateRequest extends FormRequest
             'category' => 'nullable|string',
             'active_ingredients' => 'nullable|string',
             'research_status' => 'nullable|string|in:Approved,In Development,Experimental',
-            'batch_number' => 'nullable|string|unique:products,batch_number',
+            'batch_number' => 'nullable|string|unique:products,batch_number|regex:/^[a-zA-Z]{2}-[0-9]{3}-[0-9]{2}-[0-9]{1}$/',
             'manufacturing_date' =>'nullable|date|before_or_equal:today' ,
             'expiration_date' =>'nullable|date|after:manufacturing_date',
         ];

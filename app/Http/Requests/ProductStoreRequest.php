@@ -25,7 +25,7 @@ class ProductStoreRequest extends FormRequest
             'category' => 'required|string',
             'active_ingredients' => 'required|string',
             'research_status' => 'required|string|in:Approved,In Development,Experimental',
-            'batch_number' => 'required|string|unique:products,batch_number',
+            'batch_number' => 'required|string|unique:products,batch_number|regex:/^[a-zA-Z]{2}-[0-9]{3}-[0-9]{2}-[0-9]{1}$/',
             'manufacturing_date' =>'required|date|before_or_equal:today' ,
             'expiration_date' =>'required|date|after:manufacturing_date',
             //
