@@ -40,8 +40,9 @@ cp .env.example .env
 ```
 - Environment-specific settings
 >Inside the .env file you just created change the following
-
->DB_CONNECTION=mysql DB_HOST=mysql DB_PORT=3306 DB_DATABASE=laravel DB_USERNAME=root(username can vary) DB_PASSWORD=password
+```
+DB_CONNECTION=mysql DB_HOST=mysql DB_PORT=3306 DB_DATABASE=laravel DB_USERNAME=root(username can vary) DB_PASSWORD=password
+```
 
 - Install Sail and run the app
 ```
