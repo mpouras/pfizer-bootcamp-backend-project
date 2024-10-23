@@ -2,7 +2,18 @@
 
 This backend project, developed using **Laravel Sail** and **Docker**, is part of **Pfizer's bootcamp initiative**. It provides an API that manages drug and prescription data, with smooth integration between the backend and a Vue.js frontend. By leveraging Docker for containerization and Laravel for its robust backend framework, the project ensures efficient and scalable management of pharmaceutical data.
 
-## Installation instructions (macOS)
+## Installation instructions 
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+1. **Docker Desktop** - [Install Docker Desktop](https://www.docker.com/products/docker-desktop)
+2. **WSL2 (for Windows users)** - [Install WSL2](https://learn.microsoft.com/en-us/windows/wsl/install)
+3. **PHP** (Optional, only needed if you plan to run some Laravel commands directly) - [Install PHP](https://www.php.net/manual/en/install.php)
+4. **Git** - [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+5. **Laravel Sail** - [Install Laravel Sail](https://laravel.com/docs/11.x/installation#docker-installation-using-sail)
+-  **Important for windows users:** *you need to run the following commands in the WSL2 terminal*
 
 ### Run the commands below in your terminal
 
@@ -27,6 +38,10 @@ docker run --rm --interactive --tty -v $(pwd):/app composer install
 ```
 cp .env.example .env
 ```
+- Environment-specific settings
+>Inside the .env file you just created change the following
+
+>DB_CONNECTION=mysql DB_HOST=mysql DB_PORT=3306 DB_DATABASE=laravel DB_USERNAME=root(username can vary) DB_PASSWORD=password
 
 - Install Sail and run the app
 ```
@@ -50,6 +65,18 @@ cp .env.example .env
 *then run again the command below for sail to run*
 ```
 ./vendor/bin/sail up
+```
+- Import the database
+*when prompted for the root password. Enter the password you set in your .env file.*
+  
+*create the Database if you haven’t created the database yet*
+```
+    ./vendor/bin/sail mysql -u root -p -e "CREATE DATABASE laravel;"
+```
+
+*import the SQL dump after creating the database*
+```
+./vendor/bin/sail mysql -u root -p laravel < ./laravel_dump.sql
 ```
 
 - Run database migrations
