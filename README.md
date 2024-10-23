@@ -13,7 +13,7 @@ Before you begin, ensure you have the following installed on your system:
 3. **PHP** (Optional, only needed if you plan to run some Laravel commands directly) - [Install PHP](https://www.php.net/manual/en/install.php)
 4. **Git** - [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 5. **Laravel Sail** - [Install Laravel Sail](https://laravel.com/docs/11.x/installation#docker-installation-using-sail)
--  **Important for windows users:** *you need to run the following commands in the WSL2 terminal*
+-  **Important for Windows users:** *you need to run the following commands in the WSL2 terminal*
 
 ### Run the commands below in your terminal
 
