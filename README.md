@@ -68,7 +68,8 @@ DB_CONNECTION=mysql DB_HOST=mysql DB_PORT=3306 DB_DATABASE=laravel DB_USERNAME=r
 ./vendor/bin/sail up
 ```
 - Import the database
-*when prompted for the root password. Enter the password you set in your .env file.*
+  
+**when prompted for the root password. Enter the password you set in your .env file.**
   
 *create the Database if you haven’t created the database yet*
 ```
