@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductUpdateRequest extends FormRequest
 {
@@ -20,14 +21,25 @@ class ProductUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $productId = $this->route('product')->id; // Correctly reference the product
+
         return [
-            'name' => 'nullable|string|unique:products,name',
+            'name' => [
+                'nullable',
+                'string',
+                Rule::unique('products', 'name')->ignore($productId),
+            ],
             'category' => 'nullable|string',
             'active_ingredients' => 'nullable|string',
             'research_status' => 'nullable|string|in:Approved,In Development,Experimental',
-            'batch_number' => 'nullable|string|unique:products,batch_number|regex:/^[a-zA-Z]{2}-[0-9]{3}-[0-9]{2}-[0-9]{1}$/',
-            'manufacturing_date' =>'nullable|date|before_or_equal:today' ,
-            'expiration_date' =>'nullable|date|after:manufacturing_date',
+            'batch_number' => [
+                'nullable',
+                'string',
+                'regex:/^[a-zA-Z]{2}-[0-9]{3}-[0-9]{2}-[0-9]{1}$/',
+                Rule::unique('products', 'batch_number')->ignore($productId),
+            ],
+            'manufacturing_date' => 'nullable|date|before_or_equal:today',
+            'expiration_date' => 'nullable|date|after:manufacturing_date',
         ];
     }
 }
