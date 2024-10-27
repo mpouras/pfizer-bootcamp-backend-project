@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Products.
      */
     public function index()
     {
@@ -18,13 +17,11 @@ class ProductController extends Controller
         return response()->json($products);
     }
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Product in storage.
      */
     public function store(ProductStoreRequest $request)
     {
-        $data = $request->only('name', 'category',
-        'active_ingredients','research_status','batch_number',
-        'manufacturing_date','expiration_date');
+        $data = $request->validated();
 
         Product::create($data); 
 
@@ -32,7 +29,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Product.
      */
     public function show(Product $product)
     {
@@ -40,21 +37,21 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Product in storage.
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
 
-        $data = $request->only('name','category',
-        'active_ingredients','research_status','batch_number',
-        'manufacturing_date','expiration_date');
+        
+        $data = $request->validated();
+        
         $product->update($data);
 
         return response()->json($product, 200);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Product from storage.
      */
     public function destroy(Product $product)
     {
