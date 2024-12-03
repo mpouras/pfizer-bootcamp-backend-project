@@ -22,7 +22,8 @@ class ProductUpdateRequest extends FormRequest
     public function rules(): array
     {
         $productId = $this->route('product')->id; // Correctly reference the product
-
+        
+        // Exclude name and batch_number of in Edit Product for uniqueness
         return [
             'name' => [
                 'nullable',
